@@ -36,14 +36,17 @@ public class PvMTickCounterOverlay extends OverlayPanel
     }
 
     @Override
-    public Dimension render(Graphics2D g)
-    {
+    public Dimension render(Graphics2D g) {
         List<LayoutableRenderableEntity> elems = panelComponent.getChildren();
         elems.clear();
 
-        if(config.showDamage() && plugin.getDamage() > 0) {
+        if (config.showDamage() && plugin.getDamage() > 0) {
             elems.add(TitleComponent.builder().text("Damage Dealt").color(config.damageTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getDamage().toString()).color(config.damageTextColor()).build());
+        }
+        if(config.showMaxHits() && plugin.getMH() > 0) {
+            elems.add(TitleComponent.builder().text("# Max Hits").color(config.MHTitleColor()).build());
+            elems.add(TitleComponent.builder().text(plugin.getMH().toString()).color(config.MHTextColor()).build());
         }
 
         List<Map.Entry<String, Integer>> list = new ArrayList<>(plugin.activity.entrySet());

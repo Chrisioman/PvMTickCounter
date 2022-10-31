@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.PvMTickCounter;
+package com.PvMTickCounter;
 
 import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
@@ -33,6 +33,30 @@ public interface PvMTickCounterConfig extends Config {
                 description = "Damage Text Color"
         )
         default Color damageTextColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "showMaxHits",
+                name = "Show Max Hits",
+                description = "Counts Max Hits"
+        )
+        default boolean showMaxHits()
+        {
+                return true;
+        }
+
+        @ConfigItem(
+                keyName = "MHTitleColor",
+                name = "Damage Title Color",
+                description = "Damage Title Color"
+        )
+        default Color MHTitleColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "MHTextColor",
+                name = "MH Text Color",
+                description = "MH Text Color"
+        )
+        default Color MHTextColor(){ return Color.WHITE; }
 @ConfigItem(
         keyName = "resetInstance",
         name = "Reset on new instances",
