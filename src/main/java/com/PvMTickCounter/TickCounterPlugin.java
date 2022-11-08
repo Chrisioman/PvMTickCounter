@@ -1,5 +1,6 @@
-package net.runelite.client.plugins.PvMTickCounter;
+package com.PvMTickCounter;
 
+import com.google.common.base.Stopwatch;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -15,13 +16,14 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @PluginDescriptor(name="PvM Tick Counter")
 
-public class PvMTickCounterPlugin extends Plugin{
+public class TickCounterPlugin extends Plugin{
     @Inject
     private OverlayManager overlayManager;
     @Inject
@@ -31,6 +33,13 @@ public class PvMTickCounterPlugin extends Plugin{
 
     private TickCounterUtil id;
     private Integer amount=0;
+
+    private Integer MHCount=0;
+
+    private boolean initTime = false;
+
+    private long startTime;
+
     @Provides
     TickCounterConfig provideConfig(ConfigManager configManager)
     {
@@ -67,16 +76,43 @@ public class PvMTickCounterPlugin extends Plugin{
 
         Hitsplat hitsplat = hitsplatApplied.getHitsplat();
 
-        if (hitsplat.isMine())
-        {
+        if (Hitsplat.isMine()) {
             int hit = hitsplat.getAmount();
 
-            amount += hit; }
+            amount += hit;
+        }
+
+
+        if (Hitsplat.isMine() && Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_CYAN || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_ORANGE || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_YELLOW || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_WHITE) {
+            MHCount++;
+
+        }
+    }
+    public Integer getDamage() {
+           return amount;
+       }
+    public Integer getMH() {
+       return MHCount;
+
+     }
+    public String getDamagePerTick() {
+            return String.format("%.2f", amount / Float.parseFloat(String.valueOf(this.activity.getOrDefault(client.getLocalPlayer().getName(), 0))));
+
 
     }
 
-    public Integer getDamage(){
-        return amount;
+    public String getDPS(){
+        return String.format("%.2f", amount / ((Float.parseFloat(String.valueOf(System.currentTimeMillis())) - startTime) / 1000));
+    }
+
+    public String getElapsedTime() {
+        Stopwatch total;
+        Duration elapsed = total.elapsed();
+        long s = elapsed.getSeconds();
+        String format;
+        if (s >= 3600) {
+            format = String.format("%d:%02d:%02d", s / 3600, (s % 3600) / 60, (s % 60));
+        } else format = String.format("%d:%02d", s / 60, (s % 60));
 
     }
 
@@ -92,12 +128,23 @@ public class PvMTickCounterPlugin extends Plugin{
 
         delta = id.getTicks(p.getAnimation(),weapon);
 
-        if (delta > 0)
-        {
-            String name = p.getName();
-            this.activity.put(name, this.activity.getOrDefault(name, 0) + delta);
+        if (p == client.getLocalPlayer() && !initTime && config.showDPSCalc()) {
+            initTime = true;
+            startTime = System.currentTimeMillis();
+        }else if(initTime && !config.showDPSCalc()) {
+            initTime = false;
         }
+
+        if (delta > 0)
+            {
+                String name = p.getName();
+                this.activity.put(name, this.activity.getOrDefault(name, 0) + delta);
+            }
+
     }
+
+
+
 
     @Subscribe
     public void onGameTick(GameTick tick)
@@ -118,6 +165,9 @@ public class PvMTickCounterPlugin extends Plugin{
                 event.getEntry().getOption().equals("Reset")) {
             activity.clear();
             amount = 0;
+            MHCount = 0;
         }
     }
+
+
 }

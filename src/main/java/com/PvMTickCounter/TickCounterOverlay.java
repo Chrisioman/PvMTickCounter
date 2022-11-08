@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.PvMTickCounter;
+package com.PvMTickCounter;
 
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
@@ -16,14 +16,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class PvMTickCounterOverlay extends OverlayPanel
+public class TickCounterOverlay extends OverlayPanel
 {
     private TickCounterPlugin plugin;
     private TickCounterConfig config;
     private Client client;
 
     @Inject
-    public PvMTickCounterOverlay(TickCounterPlugin plugin, Client client, TickCounterConfig config)
+    public TickCounterOverlay(TickCounterPlugin plugin,Client client,TickCounterConfig config)
     {
         super(plugin);
         setPosition(OverlayPosition.DYNAMIC);
@@ -36,17 +36,30 @@ public class PvMTickCounterOverlay extends OverlayPanel
     }
 
     @Override
-    public Dimension render(Graphics2D g) {
+    public Dimension render(Graphics2D g)
+    {
         List<LayoutableRenderableEntity> elems = panelComponent.getChildren();
         elems.clear();
 
-        if (config.showDamage() && plugin.getDamage() > 0) {
+        if(config.showDamage() && plugin.getDamage() > 0) {
             elems.add(TitleComponent.builder().text("Damage Dealt").color(config.damageTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getDamage().toString()).color(config.damageTextColor()).build());
         }
-        if(config.showMaxHits() && plugin.getMH() > 0) {
+       if(config.showMaxHits() && plugin.getMH() > 0) {
             elems.add(TitleComponent.builder().text("# Max Hits").color(config.MHTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getMH().toString()).color(config.MHTextColor()).build());
+       }
+        if(config.showDamagePerTick() && Float.parseFloat(plugin.getDamagePerTick()) > 0.00) {
+            elems.add(TitleComponent.builder().text("Damage/Combat Tick").color(config.DPTTitleColor()).build());
+            elems.add(TitleComponent.builder().text(plugin.getDamagePerTick()).color(config.DPTTextColor()).build());
+        }
+        if(config.showDPSCalc() && Float.parseFloat(plugin.getDPS()) > 0.00) {
+            elems.add(TitleComponent.builder().text("Damage/Second").color(config.DPSTitleColor()).build());
+            elems.add(TitleComponent.builder().text(plugin.getDPS()).color(config.DPSTextColor()).build());
+        }
+        if(config.showElapsedTime()) {
+            elems.add(TitleComponent.builder().text("Elapsed Time").color(config.ETTitleColor()).build());
+            elems.add(TitleComponent.builder().text(plugin.getElapsedTime()).color(config.ETTextColor()).build());
         }
 
         List<Map.Entry<String, Integer>> list = new ArrayList<>(plugin.activity.entrySet());

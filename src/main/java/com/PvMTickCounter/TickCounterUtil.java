@@ -1,8 +1,8 @@
-package net.runelite.client.plugins.PvMTickCounter;
+package com.PvMTickCounter;
 
 import java.util.HashMap;
 
-public class PvMTickCounterUtil {
+public class TickCounterUtil {
     HashMap<Integer, Integer> aniTM;
 
     public void init(){
@@ -15,6 +15,8 @@ public class PvMTickCounterUtil {
         aniTM.put(393, -1); // Staff bash (5) + Claw Scratch (4)
         aniTM.put(400, -1); // Pickaxe smash (5) + Inquisitor's Mace Stab (4)
         aniTM.put(401, -1); // dwh bop (6) + Ham Joint (3) + (axe + pickaxe) (5)
+        aniTM.put(428, -1); // Chally swipe
+        aniTM.put(440, -1); // Chally jab
 
         aniTM.put(7617, 2); // rune knife
         aniTM.put(8194, 2); // dragon knife
@@ -81,8 +83,7 @@ public class PvMTickCounterUtil {
         aniTM.put(7643, 6); // bgs spec
         aniTM.put(7644, 6); // ags spec
 
-        aniTM.put(428, 7); // Chally swipe
-        aniTM.put(440, 7); // Chally jab
+
         aniTM.put(1203, 7); // Chally spec
         aniTM.put(2066, 7); // DH axe
         aniTM.put(2067, 7); // DH Axe Smash
@@ -104,7 +105,7 @@ public class PvMTickCounterUtil {
                     return 5;
 
             }if (animationID == 426) {
-                if (weaponID == 25886 || weaponID == 25867 || weaponID == 25869 || weaponID == 25884 || weaponID == 25888 || weaponID == 25890 || weaponID == 25892 || weaponID == 25894 || weaponID == 25896 || weaponID == 25865)
+                if (weaponID == 25886 || weaponID == 25867 || weaponID == 25869 || weaponID == 25884 || weaponID == 25888 || weaponID == 25890 || weaponID == 25892 || weaponID == 25894 || weaponID == 25896 || weaponID == 25865 || weaponID == 23855 || weaponID == 23856 || weaponID == 23857 || weaponID == 23901 || weaponID == 23902 || weaponID == 23903 )
                     return 4;
                 else if (weaponID == 20997) {
                     return 5;
@@ -146,6 +147,17 @@ public class PvMTickCounterUtil {
                     return 5;
 
 
+            }if (animationID == 440) {
+                if (weaponID == 23895 || weaponID == 23896 || weaponID == 23897 || weaponID == 23849 || weaponID == 23850 || weaponID == 23851) { //CG Chally
+                    return 4;
+                } else
+                    return 7;
+
+            }if (animationID == 428) {
+                if (weaponID == 23895 || weaponID == 23896 || weaponID == 23897 || weaponID == 23849 || weaponID == 23850 || weaponID == 23851) { //CG Chally
+                    return 4;
+                } else
+                    return 7;
             }
 
         }

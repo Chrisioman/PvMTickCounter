@@ -8,7 +8,7 @@ import net.runelite.client.config.ConfigItem;
 import java.awt.*;
 
 @ConfigGroup("PvMTickCounter")
-public interface PvMTickCounterConfig extends Config {
+public interface TickCounterConfig extends Config {
 
         @ConfigItem(
                 keyName = "showDamage",
@@ -57,7 +57,82 @@ public interface PvMTickCounterConfig extends Config {
                 description = "MH Text Color"
         )
         default Color MHTextColor(){ return Color.WHITE; }
-@ConfigItem(
+
+        @ConfigItem(
+                keyName = "showDamagePerTick",
+                name = "Show Damage Per Combat Tick",
+                description = "Calculates Damage Per Combat Tick"
+        )
+        default boolean showDamagePerTick()
+        {
+                return false;
+        }
+
+        @ConfigItem(
+                keyName = "DPTTitleColor",
+                name = "DPT Text Color",
+                description = "DPT Text Color"
+        )
+        default Color DPTTitleColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "DPTTextColor",
+                name = "DPT Text Color",
+                description = "DPT Text Color"
+        )
+        default Color DPTTextColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "showDamagePerSecond",
+                name = "Show Damage Per Second",
+                description = "Calculates Damage Per Second"
+        )
+        default boolean showDPSCalc()
+        {
+                return false;
+        }
+
+        @ConfigItem(
+                keyName = "DPSTitleColor",
+                name = "DPS Text Color",
+                description = "DPS Text Color"
+        )
+        default Color DPSTitleColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "DPTTextColor",
+                name = "DPT Text Color",
+                description = "DPS Text Color"
+        )
+        default Color DPSTextColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "showElapsedTime",
+                name = "Elapsed Time",
+                description = ""
+        )
+        default boolean showElapsedTime()
+        {
+                return false;
+        }
+
+        @ConfigItem(
+                keyName = "ETTitleColor",
+                name = "Elapsed Time Text Color",
+                description = ""
+        )
+        default Color ETTitleColor(){ return Color.WHITE; }
+
+        @ConfigItem(
+                keyName = "ETTextColor",
+                name = "Elapsed Time Text Color",
+                description = ""
+        )
+        default Color ETTextColor(){ return Color.WHITE; }
+
+
+
+        @ConfigItem(
         keyName = "resetInstance",
         name = "Reset on new instances",
         description = "",
@@ -91,7 +166,7 @@ default boolean totalEnabled()
 @Alpha
 @ConfigItem(
         keyName = "totalColor",
-        name = "Total color",
+        name = "Total Ticks color",
         description = "",
         position = 6
 )
