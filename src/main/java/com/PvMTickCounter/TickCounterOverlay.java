@@ -53,11 +53,11 @@ public class TickCounterOverlay extends OverlayPanel
             elems.add(TitleComponent.builder().text("Damage/Combat Tick").color(config.DPTTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getDamagePerTick()).color(config.DPTTextColor()).build());
         }
-        if(config.showDPSCalc() && Float.parseFloat(plugin.getDPS()) > 0.00) {
+        if(config.showDPSCalc() && (Float.parseFloat(plugin.getDPS()) > 0.00)) {
             elems.add(TitleComponent.builder().text("Damage/Second").color(config.DPSTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getDPS()).color(config.DPSTextColor()).build());
         }
-        if(config.showElapsedTime()) {
+        if(config.showElapsedTime() && plugin.getElapsedTime() !=null){
             elems.add(TitleComponent.builder().text("Elapsed Time").color(config.ETTitleColor()).build());
             elems.add(TitleComponent.builder().text(plugin.getElapsedTime()).color(config.ETTextColor()).build());
         }

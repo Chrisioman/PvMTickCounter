@@ -1,6 +1,5 @@
 package com.PvMTickCounter;
 
-import com.google.common.base.Stopwatch;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -17,6 +16,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class TickCounterPlugin extends Plugin{
 
     private boolean initTime = false;
 
-    private long startTime;
+    private Instant startTime;
 
     @Provides
     TickCounterConfig provideConfig(ConfigManager configManager)
@@ -102,18 +102,25 @@ public class TickCounterPlugin extends Plugin{
     }
 
     public String getDPS(){
-        return String.format("%.2f", amount / ((Float.parseFloat(String.valueOf(System.currentTimeMillis())) - startTime) / 1000));
+        if(startTime == null)
+            return "0";
+        Instant now = Instant.now();
+        long milli = Duration.between(startTime, now).toMillis();
+        float sec = (float)milli / 1000;
+        float dps = amount / sec;
+
+
+        return String.format("%.2f", dps);
     }
 
-    public String getElapsedTime() {
-        Stopwatch total;
-        Duration elapsed = total.elapsed();
-        long s = elapsed.getSeconds();
-        String format;
-        if (s >= 3600) {
-            format = String.format("%d:%02d:%02d", s / 3600, (s % 3600) / 60, (s % 60));
-        } else format = String.format("%d:%02d", s / 60, (s % 60));
-
+    public String getElapsedTime(){
+        if(startTime == null || !initTime)
+            return null;
+        long seconds = Duration.between(startTime, Instant.now()).toMillis() / 1000;
+        long HH = seconds / 3600;
+        long MM = (seconds % 3600) / 60;
+        long SS = seconds % 60;
+        return String.format("%02d:%02d:%02d", HH, MM, SS);
     }
 
     @Subscribe
@@ -128,9 +135,9 @@ public class TickCounterPlugin extends Plugin{
 
         delta = id.getTicks(p.getAnimation(),weapon);
 
-        if (p == client.getLocalPlayer() && !initTime && config.showDPSCalc()) {
+        if (p == client.getLocalPlayer() && !initTime && config.showDPSCalc() && delta > 0) {
             initTime = true;
-            startTime = System.currentTimeMillis();
+            startTime = Instant.now();
         }else if(initTime && !config.showDPSCalc()) {
             initTime = false;
         }
@@ -156,6 +163,7 @@ public class TickCounterPlugin extends Plugin{
         {
             activity.clear();
             amount = 0;
+            initTime = false;
         }
     }
     @Subscribe
@@ -166,6 +174,7 @@ public class TickCounterPlugin extends Plugin{
             activity.clear();
             amount = 0;
             MHCount = 0;
+            initTime = false;
         }
     }
 
