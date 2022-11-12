@@ -3,9 +3,13 @@ package com.PvMTickCounter;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.Hitsplat;
+import net.runelite.api.Actor;
+import net.runelite.api.Client;
+import net.runelite.api.Player;
+import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.kit.KitType;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -39,6 +43,9 @@ public class TickCounterPlugin extends Plugin{
     private boolean initTime = false;
 
     private Instant startTime;
+
+    public TickCounterPlugin() {
+    }
 
     @Provides
     TickCounterConfig provideConfig(ConfigManager configManager)
@@ -76,14 +83,14 @@ public class TickCounterPlugin extends Plugin{
 
         Hitsplat hitsplat = hitsplatApplied.getHitsplat();
 
-        if (Hitsplat.isMine()) {
+        if (hitsplat.isMine()) {
             int hit = hitsplat.getAmount();
 
             amount += hit;
         }
 
 
-        if (Hitsplat.isMine() && Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_CYAN || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_ORANGE || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_YELLOW || Hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_WHITE) {
+        if (hitsplat.isMine() && hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_CYAN || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_ORANGE || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_YELLOW || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_MAX_ME_WHITE) {
             MHCount++;
 
         }
