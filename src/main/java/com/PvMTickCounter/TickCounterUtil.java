@@ -66,6 +66,7 @@ public class TickCounterUtil {
         aniTM.put(7552, 5); // Generic Crossbow
         aniTM.put(9493, 5); // Tumeken's Shadow
         aniTM.put(8056, 5); // Scythe Swing
+        aniTM.put(8010, 5); // Blisterwood Flail
 
         aniTM.put(1378, 6);
         aniTM.put(7045, 6);
