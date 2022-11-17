@@ -188,7 +188,7 @@ default Color otherColor()
 @Alpha
 @ConfigItem(
         keyName = "titleColor",
-        name = "Title color",
+        name = "Tick Title color",
         description = "",
         position = 2
 )

@@ -171,6 +171,7 @@ public class TickCounterPlugin extends Plugin{
             activity.clear();
             amount = 0;
             initTime = false;
+            MHCount = 0;
         }
     }
     @Subscribe

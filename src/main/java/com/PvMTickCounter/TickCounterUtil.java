@@ -15,7 +15,7 @@ public class TickCounterUtil {
         aniTM.put(393, -1); // Staff bash (5) + Claw Scratch (4)
         aniTM.put(400, -1); // Pickaxe smash (5) + Inquisitor's Mace Stab (4)
         aniTM.put(401, -1); // dwh bop (6) + Ham Joint (3) + (axe + pickaxe) (5)
-        aniTM.put(428, -1); // Chally swipe
+        aniTM.put(428, -1); // Chally swipe + Zamorakian Hasta Swipe
         aniTM.put(440, -1); // Chally jab
 
         aniTM.put(7617, 2); // rune knife
@@ -33,7 +33,7 @@ public class TickCounterUtil {
         aniTM.put(423, 4); // kick
         aniTM.put(381, 4); // Zamorakian Hasta
         aniTM.put(386, 4); // lunge
-        aniTM.put(419, 4); // Keris Smash
+        aniTM.put(419, 4); // Keris Smash/Zamorakian Hasta Pound
         aniTM.put(1062, 4); // dds spec
         aniTM.put(1067, 4); // claw stab
         aniTM.put(1167, 4); // trident cast
@@ -53,6 +53,7 @@ public class TickCounterUtil {
         aniTM.put(1711, 4); // Zamorakian Spear
 
         aniTM.put(395, 5); //Axe
+        aniTM.put(708, 5); // Iban's Blast
         aniTM.put(2062, 5); // Verac's Flail
         aniTM.put(2068, 5); // Torag's Hammers
         aniTM.put(2080, 5); // Guthans Warspear
@@ -67,6 +68,7 @@ public class TickCounterUtil {
         aniTM.put(9493, 5); // Tumeken's Shadow
         aniTM.put(8056, 5); // Scythe Swing
         aniTM.put(8010, 5); // Blisterwood Flail
+
 
         aniTM.put(1378, 6);
         aniTM.put(7045, 6);
@@ -149,7 +151,7 @@ public class TickCounterUtil {
 
 
             }if (animationID == 440) {
-                if (weaponID == 23895 || weaponID == 23896 || weaponID == 23897 || weaponID == 23849 || weaponID == 23850 || weaponID == 23851) { //CG Chally
+                if (weaponID == 23895 || weaponID == 23896 || weaponID == 23897 || weaponID == 23849 || weaponID == 23850 || weaponID == 23851 || weaponID == 11889) { //CG Chally
                     return 4;
                 } else
                     return 7;
