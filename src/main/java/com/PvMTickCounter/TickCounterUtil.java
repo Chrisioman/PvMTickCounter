@@ -68,6 +68,8 @@ public class TickCounterUtil {
         aniTM.put(9493, 5); // Tumeken's Shadow
         aniTM.put(8056, 5); // Scythe Swing
         aniTM.put(8010, 5); // Blisterwood Flail
+        aniTM.put(7004, 5); // Leaf-Bladed B-Axe chop
+        aniTM.put(3852, 5); // Leaf-Bladed B-Axe Smash
 
 
         aniTM.put(1378, 6);
