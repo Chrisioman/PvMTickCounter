@@ -1,9 +1,12 @@
 package com.PvMTickCounter;
 
+import net.runelite.api.Player;
+
 import java.util.HashMap;
 
 public class TickCounterUtil {
     HashMap<Integer, Integer> aniTM;
+    private HashMap<Player, Boolean> isBPing = new HashMap<>();
 
     public void init(){
         aniTM = new HashMap<>();
@@ -97,8 +100,14 @@ public class TickCounterUtil {
 
     }
 
-    public Integer getTicks(Integer animationID, Integer weaponID)
+    public Integer getTicks(Integer animationID, Integer weaponID, Player p)
     {
+        if(animationID == 5061 && weaponID == 12926)
+            addToBP(p, Boolean.FALSE);
+
+        if(animationID == -1)
+            isBPing.remove(p);
+
         Integer ticks = aniTM.getOrDefault(animationID, 0);
         if(ticks > 0){
             return ticks;
@@ -167,5 +176,17 @@ public class TickCounterUtil {
 
         }
         return 0;
+    }
+
+    public void addToBP(Player p, Boolean b){
+        isBPing.put(p, b);
+    }
+
+    public void clearBP(){
+        isBPing.clear();
+    }
+
+    public HashMap<Player, Boolean> getBPing(){
+        return isBPing;
     }
 }

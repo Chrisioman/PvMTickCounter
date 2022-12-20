@@ -44,6 +44,7 @@ public class TickCounterPlugin extends Plugin{
 
     private Instant startTime;
 
+
     public TickCounterPlugin() {
     }
 
@@ -72,6 +73,7 @@ public class TickCounterPlugin extends Plugin{
     {
         overlayManager.remove(overlay);
         activity.clear();
+        id.clearBP();
     }
     @Subscribe
     public void onHitsplatApplied(HitsplatApplied hitsplatApplied) {
@@ -96,16 +98,14 @@ public class TickCounterPlugin extends Plugin{
         }
     }
     public Integer getDamage() {
-           return amount;
-       }
+        return amount;
+    }
     public Integer getMH() {
-       return MHCount;
+        return MHCount;
 
-     }
+    }
     public String getDamagePerTick() {
-            return String.format("%.2f", amount / Float.parseFloat(String.valueOf(this.activity.getOrDefault(client.getLocalPlayer().getName(), 0))));
-
-
+        return String.format("%.2f", amount / Float.parseFloat(String.valueOf(this.activity.getOrDefault(client.getLocalPlayer().getName(), 0))));
     }
 
     public String getDPS(){
@@ -140,7 +140,7 @@ public class TickCounterPlugin extends Plugin{
             weapon = p.getPlayerComposition().getEquipmentId(KitType.WEAPON);
         int delta = 0;
 
-        delta = id.getTicks(p.getAnimation(),weapon);
+        delta = id.getTicks(p.getAnimation(),weapon, p);
 
         if (p == client.getLocalPlayer() && !initTime && config.showDPSCalc() && delta > 0) {
             initTime = true;
@@ -150,10 +150,10 @@ public class TickCounterPlugin extends Plugin{
         }
 
         if (delta > 0)
-            {
-                String name = p.getName();
-                this.activity.put(name, this.activity.getOrDefault(name, 0) + delta);
-            }
+        {
+            String name = p.getName();
+            this.activity.put(name, this.activity.getOrDefault(name, 0) + delta);
+        }
 
     }
 
@@ -163,12 +163,24 @@ public class TickCounterPlugin extends Plugin{
     @Subscribe
     public void onGameTick(GameTick tick)
     {
+        for(Map.Entry<Player, Boolean> entry : id.getBPing().entrySet()){
+            if(entry.getValue()){
+                String name = entry.getKey().getName();
+                int activity = this.activity.getOrDefault(name, 0).intValue();
+                this.activity.put(name, activity + 2);
+                id.addToBP(entry.getKey(), Boolean.FALSE);
+            }else{
+                id.addToBP(entry.getKey(), Boolean.TRUE);
+            }
+        }
+
         if (!config.instance())return;
         prevInstance = instanced;
         instanced = client.isInInstancedRegion();
         if (!prevInstance && instanced)
         {
             activity.clear();
+            id.clearBP();
             amount = 0;
             initTime = false;
             MHCount = 0;
@@ -180,11 +192,11 @@ public class TickCounterPlugin extends Plugin{
                 event.getEntry().getTarget().equals("PvM Tick Counter") &&
                 event.getEntry().getOption().equals("Reset")) {
             activity.clear();
+            id.clearBP();
             amount = 0;
             MHCount = 0;
             initTime = false;
         }
     }
-
 
 }
