@@ -16,6 +16,7 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.OverlayMenuClicked;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.plugins.PvMTickCounter.TickCounterUtil;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
