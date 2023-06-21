@@ -1,4 +1,4 @@
-package com.PvMTickCounter;
+package net.runelite.client.plugins.PvMTickCounter;
 
 import net.runelite.api.Player;
 
@@ -20,6 +20,7 @@ public class TickCounterUtil {
         aniTM.put(401, -1); // dwh bop (6) + Ham Joint (3) + (axe + pickaxe) (5)
         aniTM.put(428, -1); // Chally swipe + Zamorakian Hasta Swipe
         aniTM.put(440, -1); // Chally jab
+        aniTM.put(1378, -1); // Voidwaker special and ??
 
         aniTM.put(7617, 2); // rune knife
         aniTM.put(8194, 2); // dragon knife
@@ -29,8 +30,11 @@ public class TickCounterUtil {
         aniTM.put(2323, 3); // Event RPG
         aniTM.put(7618, 3); // Chinchompa
         aniTM.put(2075, 3); // Karil's CB
+        aniTM.put(9964, 3); // Webweaver Spec
 
         aniTM.put(376, 4); // dds stab
+        aniTM.put(245, 4); // Ursine Mace
+        aniTM.put(9963, 4); // Ursine Spec
         aniTM.put(377, 4); // dds slash
         aniTM.put(422, 4); // punch
         aniTM.put(423, 4); // kick
@@ -73,9 +77,9 @@ public class TickCounterUtil {
         aniTM.put(8010, 5); // Blisterwood Flail
         aniTM.put(7004, 5); // Leaf-Bladed B-Axe chop
         aniTM.put(3852, 5); // Leaf-Bladed B-Axe Smash
+        aniTM.put(9168, 5); // Zaryte Crossbow
 
 
-        aniTM.put(1378, 6);
         aniTM.put(7045, 6);
         aniTM.put(7054, 6);
         aniTM.put(2078, 6); // Ahrim's Staff
@@ -172,6 +176,12 @@ public class TickCounterUtil {
                     return 4;
                 } else
                     return 7;
+
+            }if (animationID == 1378) {
+                if (weaponID == 27690) { //voidwaker special
+                    return 4;
+                }  else
+                    return 6;
             }
 
         }
