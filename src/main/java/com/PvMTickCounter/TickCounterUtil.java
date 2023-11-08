@@ -24,7 +24,7 @@ public class TickCounterUtil {
 
         aniTM.put(7617, 2); // rune knife
         aniTM.put(8194, 2); // dragon knife
-        aniTM.put(5061, 2); // blowpipe
+        aniTM.put(5061, 0); // blowpipe
         aniTM.put(7554, 2); // Dart throw
 
         aniTM.put(2323, 3); // Event RPG
@@ -58,6 +58,7 @@ public class TickCounterUtil {
         aniTM.put(8290, 4); // Dhl Crush
         aniTM.put(4503, 4); // Inquisitor's Mace Crush
         aniTM.put(1711, 4); // Zamorakian Spear
+        aniTM.put(10501,4); // Warped Sceptre
 
         aniTM.put(395, 5); //Axe
         aniTM.put(708, 5); // Iban's Blast
