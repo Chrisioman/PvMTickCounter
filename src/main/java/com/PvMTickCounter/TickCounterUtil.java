@@ -107,7 +107,7 @@ public class TickCounterUtil {
 
     public Integer getTicks(Integer animationID, Integer weaponID, Player p)
     {
-        if(animationID == 5061 && weaponID == 12926)
+        if(animationID == 5061 || animationID == 10656 && weaponID == 12926 || weaponID == 28689) //Blowpipe and Blazing Blowpipe
             addToBP(p, Boolean.FALSE);
 
         if(animationID == -1)
