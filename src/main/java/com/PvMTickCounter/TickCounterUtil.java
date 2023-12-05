@@ -132,7 +132,7 @@ public class TickCounterUtil {
                     return 3;
 
             }if (animationID == 390) {
-                if (weaponID == 26219) {
+                if (weaponID == 26219 || weaponID == 27246) {
                     return 5;
                 } else if (weaponID == 24219) {
                     return 3;
