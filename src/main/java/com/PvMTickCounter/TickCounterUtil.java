@@ -79,6 +79,9 @@ public class TickCounterUtil {
         aniTM.put(7004, 5); // Leaf-Bladed B-Axe chop
         aniTM.put(3852, 5); // Leaf-Bladed B-Axe Smash
         aniTM.put(9168, 5); // Zaryte Crossbow
+        aniTM.put(10171, 5); // Soulreaper Axe Smash
+        aniTM.put(10172, 5); // Soulreaper Axe Chop/Hack/Block
+        aniTM.put(10173, 5); // Soulreaper Axe Spec
 
 
         aniTM.put(7045, 6);
