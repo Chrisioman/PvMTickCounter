@@ -1,6 +1,6 @@
 package com.example;
 
-import com.PvMTickCounter.TickCounterPlugin;
+import com.github.Chrisioman.PvMTickCounter.TickCounterPlugin;
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 

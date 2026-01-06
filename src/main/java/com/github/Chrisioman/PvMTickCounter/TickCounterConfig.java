@@ -1,4 +1,4 @@
-package com.PvMTickCounter;
+package com.github.Chrisioman.PvMTickCounter;
 
 import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
@@ -7,7 +7,7 @@ import net.runelite.client.config.ConfigItem;
 
 import java.awt.*;
 
-@ConfigGroup("PvMTickCounter")
+@ConfigGroup("com/github/Chrisioman/PvMTickCounter")
 public interface TickCounterConfig extends Config {
 
         @ConfigItem(
@@ -196,5 +196,17 @@ default Color titleColor()
         {
         return Color.white;
         }
-
+        @ConfigItem(
+                keyName = "maxPlayers",
+                name = "Max Players Shown",
+                description = "Number of players to show in Combat Ticks list (0 = only you)",
+                position = 1,
+                section = "overlay"
+        )
+        default int maxPlayers()
+        {
+                return 10;
         }
+
+
+}
