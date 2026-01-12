@@ -7,7 +7,7 @@ import net.runelite.client.config.ConfigItem;
 
 import java.awt.*;
 
-@ConfigGroup("com/github/Chrisioman/PvMTickCounter")
+@ConfigGroup("PvMTickCounter")
 public interface TickCounterConfig extends Config {
 
         @ConfigItem(
